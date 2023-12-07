@@ -1,1 +1,43 @@
+// EX13_14
+public class Ex13_14 {
+    public static void main(String[] args) {
+        try {
+            triangle(3, 3, 3);
+        } catch (NotTriangle e) {
+            System.out.println(e.getMessage());
+        } catch (EquilateralTriangle e) {
+            System.out.println(e.getMessage());
+        } catch (NotEquilateralTriangle e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    static void triangle(int a, int b, int c) throws NotTriangle, EquilateralTriangle, NotEquilateralTriangle {
+        if ((a + b) <= c || (a + c) <= b || (b + c) <= a) {
+            throw new NotTriangle();
+        } else if (a == b && a == c && b == c) {
+            throw new EquilateralTriangle();
+        } else {
+            throw new NotEquilateralTriangle();
+        }
+    }
+}
+
+class NotTriangle extends Exception {
+    public NotTriangle() {
+        super("不構成三角形");
+    }
+}
+
+class EquilateralTriangle extends Exception {
+    public EquilateralTriangle() {
+        super("這是正三角形");
+    }
+}
+
+class NotEquilateralTriangle extends Exception {
+    public NotEquilateralTriangle() {
+        super("這不是正三角形");
+    }
+}
 
