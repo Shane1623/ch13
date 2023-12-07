@@ -1,1 +1,50 @@
+import java.util.Scanner;
+
+public class IntegerValidation {
+    public static void main(String[] args) {
+        try {
+            try (Scanner scanner = new Scanner(System.in)) {
+                System.out.print("請輸入一整數: ");
+                int input = scanner.nextInt();
+                validateInteger(input);
+            }
+        } catch (IntegerLessThanZero e) {
+            System.out.println(e.getMessage());
+        } catch (IntegerGreaterThanZero e) {
+            System.out.println(e.getMessage());
+        } catch (IntegerEqualToZero e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("輸入錯誤: " + e.getMessage());
+        }
+    }
+
+    static void validateInteger(int value) throws IntegerLessThanZero, IntegerGreaterThanZero, IntegerEqualToZero {
+        if (value < 0) {
+            throw new IntegerLessThanZero();
+        } else if (value > 0) {
+            throw new IntegerGreaterThanZero();
+        } else {
+            throw new IntegerEqualToZero();
+        }
+    }
+}
+
+class IntegerLessThanZero extends Exception {
+    public IntegerLessThanZero() {
+        super("您輸入的整數的值小於 0");
+    }
+}
+
+class IntegerGreaterThanZero extends Exception {
+    public IntegerGreaterThanZero() {
+        super("您輸入的整數的值大於 0");
+    }
+}
+
+class IntegerEqualToZero extends Exception {
+    public IntegerEqualToZero() {
+        super("您輸入的整數的值為 0");
+    }
+}
 
